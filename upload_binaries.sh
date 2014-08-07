@@ -95,14 +95,14 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
   done;
 
   echo -e "Zipping release\n"
-  zip -r /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/releases.zip /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app
+  zip -rsfT releases.zip /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app
 
   echo -e "Uploading JAR\n"
   curl -X POST -H "Authorization: token ${GH_TOKEN}" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @/home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/releases.zip \
-     "https://uploads.github.com/repos/${GH_USER}/${GH_REPO}/releases/${IDDI}/assets?name=${BUILD_NAME}-${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.jar"
+     "https://uploads.github.com/repos/${GH_USER}/${GH_REPO}/releases/${IDDI}/assets?name=${BUILD_NAME}-${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.zip"
 
   echo -e "Done uploading\n"
 
