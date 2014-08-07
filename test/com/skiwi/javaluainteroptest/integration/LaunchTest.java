@@ -1,5 +1,5 @@
 
-package com.skiwi.integration;
+package com.skiwi.javaluainteroptest.integration;
 
 import com.skiwi.javaluainteroptest.JavaLuaInteropTest;
 import java.util.concurrent.ExecutionException;

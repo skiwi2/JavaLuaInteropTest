@@ -82,11 +82,26 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
     fi
   done;
 
+  # print all files in target/jfx/app/lib directory
+  echo -e "\nPrinting files in target/jfx/app/lib directory:"
+  for filename in /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/lib/*
+  do
+    if [ -f "$filename" ]; then
+      actualsize=$(wc -c "$filename" | cut -f 1 -d ' ')
+      echo "${filename} (${actualsize} bytes)"
+    else
+      echo "${filename}"
+    fi
+  done;
+
+  echo -e "Zipping release\n"
+  zip -r /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/releases.zip /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app
+
   echo -e "Uploading JAR\n"
   curl -X POST -H "Authorization: token ${GH_TOKEN}" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
-     --data-binary @/home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/${BUILD_NAME}-${BUILD_VERSION}-jfx.jar \
+     --data-binary @/home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/releases.zip \
      "https://uploads.github.com/repos/${GH_USER}/${GH_REPO}/releases/${IDDI}/assets?name=${BUILD_NAME}-${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.jar"
 
   echo -e "Done uploading\n"
