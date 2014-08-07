@@ -96,6 +96,7 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
 
   echo -e "Zipping release\n"
   cd /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/
+  mv ${BUILD_NAME}-${BUILD_VERSION}-jfx.jar ${BUILD_NAME}-${TRAVIS_BRANCH}-${TRAVIS_BUILD_NUMBER}.jar
   zip -r releases.zip .
   cd /home/travis/build/${GH_USER}/${GH_REPO}/
 
