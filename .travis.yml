@@ -1,0 +1,25 @@
+language: java
+
+jdk:
+    - oraclejdk8
+
+branches:
+    except:
+        - latest-master
+        
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install oracle-java8-installer
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+        
+install:
+    - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes jq; fi
+
+after_success:
+    - chmod -R 777 ./upload_binaries.sh
+    - ./upload_binaries.sh
+    
+env:
+    global:
+        - secure: "MFiWVcLk/bOJQAZCtNAut4mtMbvwkeGWngdUXldpMMZKqt7UiSUUiwV9UJovrE8HdcvpDszPsHpntFYbFwKt8ixqQa0damHMscg6AF3O1C6B4E050GdK2skCUtTV3ekhK0PkOVbVtDL7avYHZycOVfhV1s0EmWi8RJXmkJhVIBw="
