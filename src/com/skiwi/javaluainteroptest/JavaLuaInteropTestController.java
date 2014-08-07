@@ -1,5 +1,5 @@
 
-package javaluainteroptest;
+package com.skiwi.javaluainteroptest;
 
 import java.net.URL;
 import java.util.ResourceBundle;
