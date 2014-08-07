@@ -91,6 +91,7 @@ public class JavaLuaInteropTestController implements Initializable {
     
     @FXML
     private void handleRunButtonAction(final ActionEvent actionEvent) {
+        Platform.runLater(outputTextArea::clear);
         luaService.submit(this::runLuaCode);
     }
     
