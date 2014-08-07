@@ -78,7 +78,7 @@ public class JavaLuaInteropTestController implements Initializable {
             LuaValue applyFunction = globals.get("applyFunction");
             Varargs applyFunctionResult = applyFunction.invoke(LuaValue.valueOf(valueTextField.getText()));
             resultTextField.setText(applyFunctionResult.tojstring(1));
-        } catch (LuaError ex) {
+        } catch (Exception ex) {
             Dialogs.create()
                 .title("Lua Exception")
                 .style(DialogStyle.NATIVE)
