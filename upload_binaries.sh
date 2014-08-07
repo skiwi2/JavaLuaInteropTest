@@ -95,9 +95,9 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
   done;
 
   echo -e "Zipping release\n"
-  cd /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app
-  zip -rsf releases.zip .
-  cd /
+  cd /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app/
+  zip -r releases.zip .
+  cd /home/travis/build/${GH_USER}/${GH_REPO}/
 
   echo -e "Uploading ZIP\n"
   curl -X POST -H "Authorization: token ${GH_TOKEN}" \
