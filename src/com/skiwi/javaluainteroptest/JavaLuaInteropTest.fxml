@@ -11,12 +11,17 @@
 
 <GridPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.skiwi.javaluainteroptest.JavaLuaInteropTestController">
    <children>
-      <TextArea fx:id="codeTextArea" prefHeight="200.0" prefWidth="200.0" />
+      <SplitPane fx:id="splitPane" dividerPositions="0.8" orientation="VERTICAL">
+         <items>
+            <TextArea fx:id="codeTextArea" prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="outputTextArea" prefHeight="200.0" prefWidth="200.0" />
+         </items>
+      </SplitPane>
       <GridPane GridPane.rowIndex="1">
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="14.0" layoutY="7.0" text="Value: " AnchorPane.leftAnchor="14.0">
+                  <Label fx:id="valueLabel" layoutX="14.0" layoutY="7.0" text="Value: " AnchorPane.leftAnchor="14.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -26,7 +31,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label layoutX="14.0" layoutY="7.0" text="Result: " AnchorPane.leftAnchor="14.0">
+                  <Label fx:id="resultLabel" layoutX="14.0" layoutY="7.0" text="Result: " AnchorPane.leftAnchor="14.0">
                      <font>
                         <Font size="18.0" />
                      </font>

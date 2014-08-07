@@ -18,7 +18,7 @@ import org.loadui.testfx.GuiTest;
  *
  * @author Frank van Heeswijk
  */
-public class RunLuaTest extends GuiTest {
+public class RunLuaOutputTest extends GuiTest {
     @Override
     protected Parent getRootNode() {
         try {
@@ -30,13 +30,13 @@ public class RunLuaTest extends GuiTest {
     }
     
     @Test
-    public void testRunLua() {
+    public void testRunLuaOutput() {
         TextArea codeTextArea = lookup(find("#splitPane"), "#codeTextArea", TextArea.class);
         Platform.runLater(() -> {
             codeTextArea.clear();
             codeTextArea.appendText("function applyFunction(value)");
             codeTextArea.appendText(System.lineSeparator());
-            codeTextArea.appendText("return value + 1");
+            codeTextArea.appendText("print(value + 1)");
             codeTextArea.appendText(System.lineSeparator());
             codeTextArea.appendText("end");
         });
@@ -46,8 +46,9 @@ public class RunLuaTest extends GuiTest {
         
         click("#runButton");
         
-        TextField resultTextField = find("#resultTextField");
-        waitUntil(resultTextField, textField -> textField.getText().equals("6"), 3);
+        TextArea outputTextArea = lookup(find("#splitPane"), "#outputTextArea", TextArea.class);
+        outputTextArea.clear();
+        waitUntil(outputTextArea, textArea -> textArea.getText().contains("6"), 3);
     }
     
     @SuppressWarnings("unchecked")

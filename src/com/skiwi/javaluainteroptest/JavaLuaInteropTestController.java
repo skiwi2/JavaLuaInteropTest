@@ -2,17 +2,15 @@
 package com.skiwi.javaluainteroptest;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
-import java.io.UncheckedIOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +19,6 @@ import javafx.scene.control.TextField;
 import org.controlsfx.dialog.DialogStyle;
 import org.controlsfx.dialog.Dialogs;
 import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -37,12 +34,17 @@ public class JavaLuaInteropTestController implements Initializable {
     private TextArea codeTextArea;
     
     @FXML
+    private TextArea outputTextArea;
+    
+    @FXML
     private TextField valueTextField;
     
     @FXML
     private TextField resultTextField;
     
     private Globals globals;
+    
+    private ExecutorService luaService;
     
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
@@ -62,13 +64,34 @@ public class JavaLuaInteropTestController implements Initializable {
     }
     
     private void setupLua() {
+        luaService = Executors.newCachedThreadPool(runnable -> {
+            Thread thread = new Thread(runnable);
+            thread.setDaemon(true);
+            return thread;
+        });
+        
         globals = JsePlatform.debugGlobals();
         LuaJC.install(globals);
+        
+        globals.STDOUT = new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                String text = new String(new int[]{b}, 0, 1);
+                Platform.runLater(() -> outputTextArea.appendText(text));
+            }
+        });
+        globals.STDERR = new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                String text = new String(new int[]{b}, 0, 1);
+                Platform.runLater(() -> outputTextArea.appendText(text));
+            }
+        });
     }
     
     @FXML
     private void handleRunButtonAction(final ActionEvent actionEvent) {
-        runLuaCode();
+        luaService.submit(this::runLuaCode);
     }
     
     private void runLuaCode() {
@@ -77,7 +100,7 @@ public class JavaLuaInteropTestController implements Initializable {
             chunk.call();
             LuaValue applyFunction = globals.get("applyFunction");
             Varargs applyFunctionResult = applyFunction.invoke(LuaValue.valueOf(valueTextField.getText()));
-            resultTextField.setText(applyFunctionResult.tojstring(1));
+            Platform.runLater(() -> resultTextField.setText(applyFunctionResult.tojstring(1)));
         } catch (Exception ex) {
             Dialogs.create()
                 .title("Lua Exception")
