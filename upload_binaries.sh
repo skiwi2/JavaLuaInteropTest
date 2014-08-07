@@ -96,7 +96,7 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
 
   echo -e "Zipping release\n"
   cd /home/travis/build/${GH_USER}/${GH_REPO}/target/jfx/app
-  zip -rsfT releases.zip /
+  zip -rsfT releases.zip .
   cd /
 
   echo -e "Uploading ZIP\n"
