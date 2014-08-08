@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -97,16 +96,16 @@ public class JavaLuaInteropTestController implements Initializable {
     
     private void runLuaCode() {
         try {
-            LuaValue chunk = globals.load(new StringReader(codeTextArea.getText()), "interopTest");
-            chunk.call();
+            globals.load(new StringReader(codeTextArea.getText()), "interopTest").call();
             LuaValue applyFunction = globals.get("applyFunction");
             Varargs applyFunctionResult = applyFunction.invoke(LuaValue.valueOf(valueTextField.getText()));
             Platform.runLater(() -> resultTextField.setText(applyFunctionResult.tojstring(1)));
-        } catch (Exception ex) {
-            Dialogs.create()
+        } catch (Throwable ex) {
+            Platform.runLater(() -> Dialogs.create()
                 .title("Lua Exception")
+                .masthead((ex instanceof Error) ? "An error has occured" : "An exception has occured")
                 .style(DialogStyle.NATIVE)
-                .showException(ex);
+                .showException(ex));
         }
     }
 }

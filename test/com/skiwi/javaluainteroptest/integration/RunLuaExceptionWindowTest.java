@@ -4,12 +4,18 @@ package com.skiwi.javaluainteroptest.integration;
 import com.skiwi.javaluainteroptest.JavaLuaInteropTestController;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import static org.hamcrest.Matchers.*;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
@@ -17,7 +23,7 @@ import org.loadui.testfx.GuiTest;
  *
  * @author Frank van Heeswijk
  */
-public class RunLuaTest extends GuiTest {
+public class RunLuaExceptionWindowTest extends GuiTest {
     @Override
     protected Parent getRootNode() {
         try {
@@ -28,25 +34,24 @@ public class RunLuaTest extends GuiTest {
         }
     }
     
-    @Test
-    public void testRunLua() {
+    @Test(timeout = 3000)
+    public void testRunLuaExceptionWindow() {
         TextArea codeTextArea = lookup(find("#splitPane"), "#codeTextArea", TextArea.class);
         Platform.runLater(() -> {
             codeTextArea.clear();
             codeTextArea.appendText("function applyFunction(value)");
             codeTextArea.appendText(System.lineSeparator());
-            codeTextArea.appendText("return value + 1");
+            codeTextArea.appendText("return value + value");
             codeTextArea.appendText(System.lineSeparator());
             codeTextArea.appendText("end");
         });
         
         TextField valueTextField = find("#valueTextField");
-        Platform.runLater(() -> valueTextField.setText("5"));
+        Platform.runLater(() -> valueTextField.setText("test"));
         
         click("#runButton");
         
-        TextField resultTextField = find("#resultTextField");
-        waitUntil(resultTextField, textField -> textField.getText().equals("6"), 3);
+        waitUntil((Callable<List<String>>)(() -> getWindows().stream().map(window -> ((Stage)window).getTitle()).collect(Collectors.toList())), hasItem("Lua Exception"));
     }
     
     @SuppressWarnings("unchecked")
