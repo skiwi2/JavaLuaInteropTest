@@ -21,6 +21,7 @@ public class JavaLuaInteropTest extends Application {
         
         primaryStage.setTitle("Java Lua Interopability Test");
         primaryStage.setScene(scene);
+        primaryStage.setOnCloseRequest(eventHandler -> System.exit(0));
         primaryStage.show();
     }
 
