@@ -12,63 +12,6 @@
 
 <TabPane fx:id="tabPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.skiwi.javaluainteroptest.JavaLuaInteropTestController">
    <tabs>
-      <Tab fx:id="luaFunctionTab" closable="false" text="Lua Function">
-         <content>
-            <GridPane prefHeight="600.0" prefWidth="800.0">
-               <children>
-                  <SplitPane fx:id="splitPane" dividerPositions="0.8" orientation="VERTICAL">
-                     <items>
-                        <TextArea fx:id="codeTextArea" prefHeight="200.0" prefWidth="200.0" />
-                        <TextArea fx:id="outputTextArea" prefHeight="200.0" prefWidth="200.0" />
-                     </items>
-                  </SplitPane>
-                  <GridPane GridPane.rowIndex="1">
-                     <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="valueLabel" layoutX="14.0" layoutY="7.0" text="Value: " AnchorPane.leftAnchor="14.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="valueTextField" layoutX="68.0" layoutY="8.0" prefWidth="100.0" AnchorPane.leftAnchor="68.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <children>
-                              <Label fx:id="resultLabel" layoutX="14.0" layoutY="7.0" text="Result: " AnchorPane.leftAnchor="14.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="resultTextField" editable="false" layoutX="72.0" layoutY="8.0" prefWidth="100.0" AnchorPane.leftAnchor="72.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                           <children>
-                              <Button fx:id="runButton" layoutX="186.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleRunButtonAction" prefWidth="75.0" text="Run" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="42.5" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="42.5" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
-                     </rowConstraints>
-                  </GridPane>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-         </content>
-      </Tab>
+      <Tab fx:id="luaFunctionTab" closable="false" text="Lua Function" />
    </tabs>
 </TabPane>
