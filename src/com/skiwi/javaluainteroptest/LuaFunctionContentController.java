@@ -54,10 +54,9 @@ public class LuaFunctionContentController implements Initializable {
     private void setupLayout() {
         codeTextArea.appendText("-- Always name this function \"applyFunction\"");
         codeTextArea.appendText(System.lineSeparator());
-        codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("function applyFunction(value)");
         codeTextArea.appendText(System.lineSeparator());
-        codeTextArea.appendText("    -- your implementation here");
+        codeTextArea.appendText("    -- Your implementation here");
         codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("end");
     }
@@ -102,9 +101,10 @@ public class LuaFunctionContentController implements Initializable {
             Platform.runLater(() -> resultTextField.setText(applyFunctionResult.tojstring(1)));
         } catch (Throwable ex) {
             Platform.runLater(() -> Dialogs.create()
+                .style(DialogStyle.NATIVE)
+                .lightweight()
                 .title("Lua Exception")
                 .masthead((ex instanceof Error) ? "An error has occured" : "An exception has occured")
-                .style(DialogStyle.NATIVE)
                 .showException(ex));
         }
     }

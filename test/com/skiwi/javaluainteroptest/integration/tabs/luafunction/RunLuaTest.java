@@ -32,7 +32,7 @@ public class RunLuaTest extends GuiTest {
     @Test
     public void testRunLua() {
         TabPane tabPane = find("#tabPane");
-        tabPane.getSelectionModel().select(lookupTab(tabPane, "Lua Function"));
+        Platform.runLater(() -> tabPane.getSelectionModel().select(lookupTab(tabPane, "Lua Function")));
         
         TextArea codeTextArea = lookupWithinNode(find("#splitPane"), "#codeTextArea", TextArea.class);
         Platform.runLater(() -> {

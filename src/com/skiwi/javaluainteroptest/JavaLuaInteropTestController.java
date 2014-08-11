@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 
 /**
  * FXML Controller class
@@ -19,10 +18,10 @@ import javafx.scene.control.TabPane;
  */
 public class JavaLuaInteropTestController implements Initializable {
     @FXML
-    private TabPane tabPane;
+    private Tab luaFunctionTab;
     
     @FXML
-    private Tab luaFunctionTab;
+    private Tab callbackFunctionsTab;
     
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
@@ -30,6 +29,14 @@ public class JavaLuaInteropTestController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(LuaFunctionContentController.class.getResource("LuaFunctionContent.fxml"));
             Node luaFunction = fxmlLoader.load();
             luaFunctionTab.setContent(luaFunction);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
+        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(CallbackFunctionsContentController.class.getResource("CallbackFunctionsContent.fxml"));
+            Node luaFunction = fxmlLoader.load();
+            callbackFunctionsTab.setContent(luaFunction);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
