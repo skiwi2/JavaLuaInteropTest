@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 import static org.loadui.testfx.GuiTest.*;
@@ -19,6 +20,7 @@ import static org.loadui.testfx.GuiTest.*;
  *
  * @author Frank van Heeswijk
  */
+@Ignore
 public class RunLuaExceptionWindowTest extends GuiTest {
     @Override
     protected Parent getRootNode() {
