@@ -68,7 +68,7 @@ public class LuaFunctionContentController implements Initializable {
             return thread;
         });
         
-        globals = JsePlatform.debugGlobals();
+        globals = JsePlatform.standardGlobals();
         LuaJC.install(globals);
         
         globals.STDOUT = new PrintStream(new OutputStream() {

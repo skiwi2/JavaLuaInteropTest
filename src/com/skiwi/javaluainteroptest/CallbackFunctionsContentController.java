@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,7 +125,7 @@ public class CallbackFunctionsContentController implements Initializable {
             return thread;
         });
         
-        globals = JsePlatform.debugGlobals();
+        globals = JsePlatform.standardGlobals();
         LuaJC.install(globals);
         
         globals.STDOUT = new PrintStream(new OutputStream() {
