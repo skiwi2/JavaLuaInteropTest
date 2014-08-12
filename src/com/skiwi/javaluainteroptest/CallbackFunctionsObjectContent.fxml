@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.skiwi.javaluainteroptest.CallbackFunctionsObjectContentController">
+   <children>
+      <SplitPane fx:id="splitPane" dividerPositions="0.6" orientation="VERTICAL">
+         <items>
+            <TextArea fx:id="codeTextArea" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.75" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane>
+                           <children>
+                              <TableView fx:id="callbackTableView" editable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="keyTableColumn" prefWidth="150.0" text="Key" />
+                                  <TableColumn fx:id="valueTableColumn" editable="true" prefWidth="150.0" text="Value" />
+                                    <TableColumn fx:id="resultTableColumn" prefWidth="150.0" text="Result" />
+                                </columns>
+                              </TableView>
+                              <GridPane layoutX="113.0" layoutY="151.0" prefHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="NEVER" minWidth="10.0" percentWidth="33.333" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="NEVER" minWidth="10.0" percentWidth="33.333" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="NEVER" minWidth="10.0" percentWidth="33.333" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="16.0" text="Key: " AnchorPane.leftAnchor="14.0">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="keyTextField" layoutX="46.0" layoutY="14.0" prefWidth="100.0" AnchorPane.leftAnchor="46.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="16.0" text="Value: " AnchorPane.leftAnchor="14.0">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="valueTextField" layoutX="59.0" layoutY="14.0" prefWidth="100.0" AnchorPane.leftAnchor="59.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Button fx:id="addButton" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleAddButtonAction" prefWidth="75.0" text="Add" AnchorPane.rightAnchor="14.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <TextArea fx:id="outputTextArea" prefHeight="200.0" prefWidth="200.0" />
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <AnchorPane GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="runButton" layoutX="711.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleRunButtonAction" prefWidth="75.0" text="Run" AnchorPane.rightAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>

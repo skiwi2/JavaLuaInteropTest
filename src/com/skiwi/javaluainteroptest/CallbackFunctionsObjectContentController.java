@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,7 +38,7 @@ import org.luaj.vm2.luajc.LuaJC;
  *
  * @author Frank van Heeswijk
  */
-public class CallbackFunctionsContentController implements Initializable {
+public class CallbackFunctionsObjectContentController implements Initializable {
     @FXML
     private TextArea codeTextArea;
     
@@ -113,7 +114,7 @@ public class CallbackFunctionsContentController implements Initializable {
         codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("function initCallbacks()");
         codeTextArea.appendText(System.lineSeparator());
-        codeTextArea.appendText("    -- Put your callbackStore:addCallback(key:string, function:function(string -> string)) calls here");
+        codeTextArea.appendText("    -- Put your callbackStore:addCallback(key:string, function:function(source<string> -> string)) calls here");
         codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("end");
     }
@@ -158,7 +159,7 @@ public class CallbackFunctionsContentController implements Initializable {
                 globals.set("callbackStore", CoerceJavaToLua.coerce(callbackStore));
                 globals.get("initCallbacks").call();
                 callbackTableView.getItems().forEach(tableEntry ->
-                    tableEntry.setResult(callbackStore.performCallback(tableEntry.getKey(), tableEntry.getValue()).toString()));
+                    tableEntry.setResult(callbackStore.performCallback(tableEntry.getKey(), () -> tableEntry.getValue()).toString()));
             } catch (Throwable ex) {
                 Dialogs.create()
                     .style(DialogStyle.NATIVE)

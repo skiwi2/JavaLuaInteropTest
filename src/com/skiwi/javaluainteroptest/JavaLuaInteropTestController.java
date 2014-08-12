@@ -23,20 +23,31 @@ public class JavaLuaInteropTestController implements Initializable {
     @FXML
     private Tab callbackFunctionsTab;
     
+    @FXML
+    private Tab callbackFunctionsObjectTab;
+    
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(LuaFunctionContentController.class.getResource("LuaFunctionContent.fxml"));
-            Node luaFunction = fxmlLoader.load();
-            luaFunctionTab.setContent(luaFunction);
+            Node content = fxmlLoader.load();
+            luaFunctionTab.setContent(content);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
         
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(CallbackFunctionsContentController.class.getResource("CallbackFunctionsContent.fxml"));
-            Node luaFunction = fxmlLoader.load();
-            callbackFunctionsTab.setContent(luaFunction);
+            Node content = fxmlLoader.load();
+            callbackFunctionsTab.setContent(content);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
+        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(CallbackFunctionsObjectContentController.class.getResource("CallbackFunctionsObjectContent.fxml"));
+            Node content = fxmlLoader.load();
+            callbackFunctionsObjectTab.setContent(content);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
