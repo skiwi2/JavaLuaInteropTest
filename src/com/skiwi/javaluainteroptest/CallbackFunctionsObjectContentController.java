@@ -175,6 +175,16 @@ public class CallbackFunctionsObjectContentController implements Initializable {
     private void handleAddButtonAction(final ActionEvent actionEvent) {
         String key = keyTextField.getText();
         String value = valueTextField.getText();
+        if (key.isEmpty()) {
+            Dialogs.create()
+                .style(DialogStyle.NATIVE)
+                .lightweight()
+                .title("Invalid Action")
+                .masthead("Action is not allowed")
+                .message("You cannot add an empty key.")
+                .showError();
+            return;
+        }
         if (callbackTableView.getItems().stream().anyMatch(tableEntry -> tableEntry.getKey().equals(key))) {
             Dialogs.create()
                 .style(DialogStyle.NATIVE)
