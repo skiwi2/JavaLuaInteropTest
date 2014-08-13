@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -26,19 +25,11 @@ public class CallbackStore {
         callbackMapping.get(key).add(function);
     }
     
-    public List<String> performCallback(final String key, final String value) {
+    public <T> List<String> performCallback(final String key, final T value) {
         Objects.requireNonNull(key, "key");
         Objects.requireNonNull(value, "value");
         return callbackMapping.getOrDefault(key, Collections.emptyList()).stream()
-            .map(function -> function.invoke(LuaValue.valueOf(value)).tojstring())
-            .collect(Collectors.toList());
-    }
-    
-    public List<String> performCallback(final String key, final Supplier<Object> valueSupplier) {
-        Objects.requireNonNull(key, "key");
-        Objects.requireNonNull(valueSupplier, "valueSupplier");
-        return callbackMapping.getOrDefault(key, Collections.emptyList()).stream()
-            .map(function -> function.invoke(CoerceJavaToLua.coerce(valueSupplier)).tojstring())
+            .map(function -> function.invoke(CoerceJavaToLua.coerce(value)).tojstring())
             .collect(Collectors.toList());
     }
 }

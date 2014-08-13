@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -158,7 +159,7 @@ public class CallbackFunctionsObjectContentController implements Initializable {
                 globals.set("callbackStore", CoerceJavaToLua.coerce(callbackStore));
                 globals.get("initCallbacks").call();
                 callbackTableView.getItems().forEach(tableEntry ->
-                    tableEntry.setResult(callbackStore.performCallback(tableEntry.getKey(), () -> tableEntry.getValue()).toString()));
+                    tableEntry.setResult(callbackStore.<Supplier<String>>performCallback(tableEntry.getKey(), () -> tableEntry.getValue()).toString()));
             } catch (Throwable ex) {
                 Dialogs.create()
                     .style(DialogStyle.NATIVE)
