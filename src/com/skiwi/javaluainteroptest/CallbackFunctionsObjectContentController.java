@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Supplier;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -114,7 +113,7 @@ public class CallbackFunctionsObjectContentController implements Initializable {
         codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("function initCallbacks()");
         codeTextArea.appendText(System.lineSeparator());
-        codeTextArea.appendText("    -- Put your callbackStore:addCallback(key:string, function:function(source<string> -> string)) calls here");
+        codeTextArea.appendText("    -- Put your callbackStore:addCallback(key:string, function:function(supplier<string> -> string)) calls here");
         codeTextArea.appendText(System.lineSeparator());
         codeTextArea.appendText("end");
     }
