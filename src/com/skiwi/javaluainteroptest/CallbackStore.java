@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import org.luaj.vm2.lib.jse.CoerceLuaToJava;
 
 /**
  *
@@ -30,6 +32,23 @@ public class CallbackStore {
         Objects.requireNonNull(value, "value");
         return callbackMapping.getOrDefault(key, Collections.emptyList()).stream()
             .map(function -> function.invoke(CoerceJavaToLua.coerce(value)).tojstring())
+            .collect(Collectors.toList());
+    }
+    
+    public <T, U> List<String> performCallback(final String key, final T value, final Class<U> clazz, final Function<U, String> stringifyFunction) {
+        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(value, "value");
+        Objects.requireNonNull(clazz, "clazz");
+        Objects.requireNonNull(stringifyFunction, "stringifyFunction");
+        return callbackMapping.getOrDefault(key, Collections.emptyList()).stream()
+            .map(function -> CoerceLuaToJava.coerce(function.invoke(CoerceJavaToLua.coerce(value)).arg1(), clazz))
+            .map(obj -> {
+                //safe because CoerceLuaToJava.coerce already performs a cast
+                @SuppressWarnings("unchecked")
+                U u = (U)obj;
+                return u;
+            })
+            .map(stringifyFunction)
             .collect(Collectors.toList());
     }
 }

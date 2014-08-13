@@ -14,5 +14,6 @@
       <Tab fx:id="luaFunctionTab" closable="false" text="Lua Function" />
       <Tab fx:id="callbackFunctionsTab" closable="false" text="Callback Functions" />
       <Tab fx:id="callbackFunctionsObjectTab" closable="false" text="Callback Functions Object" />
+      <Tab fx:id="callbackFunctionsCompositeObjectTab" closable="false" text="Callback Functions Composite Object" />
    </tabs>
 </TabPane>

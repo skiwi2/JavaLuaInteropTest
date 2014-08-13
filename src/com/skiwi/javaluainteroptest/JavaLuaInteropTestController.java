@@ -26,6 +26,9 @@ public class JavaLuaInteropTestController implements Initializable {
     @FXML
     private Tab callbackFunctionsObjectTab;
     
+    @FXML
+    private Tab callbackFunctionsCompositeObjectTab;
+    
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
         try {
@@ -48,6 +51,14 @@ public class JavaLuaInteropTestController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(CallbackFunctionsObjectContentController.class.getResource("CallbackFunctionsObjectContent.fxml"));
             Node content = fxmlLoader.load();
             callbackFunctionsObjectTab.setContent(content);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
+        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(CallbackFunctionsObjectContentController.class.getResource("CallbackFunctionsCompositeObjectContent.fxml"));
+            Node content = fxmlLoader.load();
+            callbackFunctionsCompositeObjectTab.setContent(content);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }

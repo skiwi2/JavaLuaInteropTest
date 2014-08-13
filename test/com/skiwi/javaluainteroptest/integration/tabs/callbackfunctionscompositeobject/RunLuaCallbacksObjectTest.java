@@ -1,5 +1,5 @@
 
-package com.skiwi.javaluainteroptest.integration.tabs.callbackfunctionsobject;
+package com.skiwi.javaluainteroptest.integration.tabs.callbackfunctionscompositeobject;
 
 import com.skiwi.javaluainteroptest.CallbackFunctionsObjectContentController.TableEntry;
 import com.skiwi.javaluainteroptest.JavaLuaInteropTestController;
