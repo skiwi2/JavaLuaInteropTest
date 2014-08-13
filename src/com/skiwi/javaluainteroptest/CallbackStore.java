@@ -34,7 +34,7 @@ public class CallbackStore {
             .collect(Collectors.toList());
     }
     
-    public List<String> performCallback(final String key, final Supplier<String> valueSupplier) {
+    public List<String> performCallback(final String key, final Supplier<Object> valueSupplier) {
         Objects.requireNonNull(key, "key");
         Objects.requireNonNull(valueSupplier, "valueSupplier");
         return callbackMapping.getOrDefault(key, Collections.emptyList()).stream()
