@@ -20,6 +20,11 @@ after_success:
     - chmod -R 777 ./upload_binaries.sh
     - ./upload_binaries.sh
     
+notifications:
+    webhooks:
+        urls:
+            - secure: "VldFdiLInUMOq+M3Uht8xAUgNTgTpUoANExEdXOXnPcbGWB8ITj8rYkYj8zdIvRnyzeDWofJF2BEK4GSdg1G9GrotWjdz4BWZORB8vWZY8lw17e4iy6K42KOHgLxDWlDGWi2HxCEd5J65azfNLoElI+8+9Qpx8jiyKtykib7V5U="
+    
 env:
     global:
         - secure: "MFiWVcLk/bOJQAZCtNAut4mtMbvwkeGWngdUXldpMMZKqt7UiSUUiwV9UJovrE8HdcvpDszPsHpntFYbFwKt8ixqQa0damHMscg6AF3O1C6B4E050GdK2skCUtTV3ekhK0PkOVbVtDL7avYHZycOVfhV1s0EmWi8RJXmkJhVIBw="
